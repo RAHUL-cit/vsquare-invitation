@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#3a0505">
+<meta property="og:title" content="V SQUARE Financial Services - Invitation">
+<meta property="og:description" content="You are cordially invited">
+<title>Invitation | V SQUARE Financial Services</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;min-height:100%;background:#180303;color:#fff;font-family:Georgia,"Times New Roman",serif}
+body{overflow-x:hidden}
+#opening{
+  position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;
+  background:
+    radial-gradient(circle at 50% 45%,rgba(190,125,25,.18),transparent 35%),
+    linear-gradient(135deg,#210404,#570909 50%,#190202);
+  transition:opacity 1.2s ease,visibility 1.2s ease;
+}
+#opening.hide{opacity:0;visibility:hidden;pointer-events:none}
+.open-content{text-align:center;padding:24px;position:relative;z-index:2}
+.open-content .orn{font-size:42px;color:#e7b74a;letter-spacing:12px;text-shadow:0 0 15px #ffd86a}
+.open-content h1{font-size:clamp(25px,7vw,48px);margin:18px 0 8px;color:#f7d16b;text-shadow:0 2px 8px #000}
+.open-content p{font-size:clamp(15px,4vw,22px);margin:0 0 28px;color:#fff3d1}
+#openBtn{
+  border:1px solid #e6b94f;border-radius:999px;background:linear-gradient(#8d220f,#4c0805);
+  color:#ffe5a0;padding:13px 30px;font-size:17px;letter-spacing:.5px;box-shadow:0 0 25px rgba(235,182,65,.28);
+}
+.petal{
+  position:absolute;top:-12vh;width:15px;height:22px;border-radius:70% 30% 70% 30%;
+  background:linear-gradient(135deg,#fff1f1,#d83a4d 55%,#7d0d1a);
+  box-shadow:0 2px 7px rgba(0,0,0,.35);opacity:.9;
+  animation:fall linear forwards;
+}
+@keyframes fall{
+  0%{transform:translate3d(0,-10vh,0) rotate(0deg)}
+  100%{transform:translate3d(var(--drift),115vh,0) rotate(720deg)}
+}
+#invitation{
+  min-height:100vh;padding:18px 10px 30px;display:flex;justify-content:center;
+  opacity:0;transform:scale(.97);transition:opacity 1.4s ease,transform 1.4s ease;
+}
+#invitation.show{opacity:1;transform:scale(1)}
+.card{width:min(100%,700px);position:relative}
+.card img{display:block;width:100%;height:auto;border-radius:2px;box-shadow:0 12px 45px rgba(0,0,0,.55)}
+.hint{text-align:center;color:#e9c778;font-family:Arial,sans-serif;font-size:12px;margin-top:12px;opacity:.75}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<div id="opening">
+  <div class="open-content">
+    <div class="orn">✦ ❀ ✦</div>
+    <h1>அன்புடன் அழைப்பு</h1>
+    <p>உங்களுக்காக ஒரு சிறப்பு அழைப்பிதழ்</p>
+    <button id="openBtn">🌸 அழைப்பிதழை திறக்க</button>
+  </div>
+</div>
+
+<main id="invitation">
+  <div class="card">
+    <img src="invitation.jpg" alt="V SQUARE Financial Services invitation">
+    <div class="hint">V SQUARE FINANCIAL SERVICES</div>
+  </div>
+</main>
+
+<script>
+const opening = document.getElementById('opening');
+const invitation = document.getElementById('invitation');
+const btn = document.getElementById('openBtn');
+
+function petals(count=55){
+  for(let i=0;i<count;i++){
+    const p=document.createElement('span');
+    p.className='petal';
+    p.style.left=(Math.random()*100)+'vw';
+    p.style.setProperty('--drift',((Math.random()-.5)*180)+'px');
+    p.style.animationDuration=(3.0+Math.random()*2.7)+'s';
+    p.style.animationDelay=(Math.random()*1.5)+'s';
+    p.style.transform=`rotate(${Math.random()*360}deg)`;
+    p.style.width=(9+Math.random()*11)+'px';
+    p.style.height=(14+Math.random()*15)+'px';
+    document.getElementById('opening').appendChild(p);
+    setTimeout(()=>p.remove(),7000);
+  }
+}
+function openInvitation(){
+  petals(70);
+  setTimeout(()=>{
+    opening.classList.add('hide');
+    invitation.classList.add('show');
+    window.scrollTo({top:0,behavior:'smooth'});
+  },1800);
+}
+btn.addEventListener('click',openInvitation);
+window.addEventListener('load',()=>setTimeout(()=>petals(35),250));
+</script>
+</body>
+</html>
